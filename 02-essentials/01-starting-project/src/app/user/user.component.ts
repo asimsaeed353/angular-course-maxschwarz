@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output, output} from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -12,7 +12,10 @@ export class UserComponent {
   @Input({required: true}) name!: string;
 
   // define a custom event to output any component and it must be assigned a new instance of EventEmitter
-  @Output() select = new EventEmitter;
+  // @Output() select = new EventEmitter;
+
+  // new approach and it will work same as like @Output() 
+  select = output<string>();  
   
   // on any event emit some value in this eventEmitter
 
