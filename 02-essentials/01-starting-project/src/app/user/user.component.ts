@@ -1,5 +1,22 @@
 import { Component, EventEmitter, Input, Output, output} from '@angular/core';
 
+// define you own object type 
+// 1. type
+/*
+type User = {
+  id: string, 
+  name: string,
+  avatar: string
+};
+*/
+
+// 2. Interface 
+interface User {
+  id: string, 
+  name: string,
+  avatar: string  
+};
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -7,16 +24,8 @@ import { Component, EventEmitter, Input, Output, output} from '@angular/core';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  // @Input({required: true}) id?: string;
-  // @Input({required: true}) avatar?: string;
-  // @Input({required: true}) name?: string; 
-
-  // instead of above three inputs, you can take just only one user object 
-  @Input({required: true}) user!: {
-    id: string, 
-    name: string,
-    avatar: string
-  };
+  // instead of  three inputs, you can take just only one user object 
+  @Input({required: true}) user!: User;
 
   @Output() select = new EventEmitter<string>();
 
