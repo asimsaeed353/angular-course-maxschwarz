@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
-import { NgIf } from '@angular/common';
 
 // this is going to be our root component so import the nested components here and register in 'imports[]'
 import { HeaderComponent } from './header/header.component';
@@ -11,7 +9,7 @@ import { TasksComponent } from './tasks/tasks.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, UserComponent, TasksComponent, NgFor, NgIf],
+  imports: [HeaderComponent, UserComponent, TasksComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
