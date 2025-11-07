@@ -17,4 +17,7 @@ export class AppComponent {
   // since we are going to access the users in the app.component.html so define the property here.
   users = DUMMY_USERS;
 
+  onSelectUser(id: string){
+    console.log("Selected User id is " + id);
+  }
 }
