@@ -16,6 +16,9 @@ export class UserComponent {
 
   @Output() select = new EventEmitter<string>();
 
+  // highlight the selected user 
+  @Input({required: true}) selected!: boolean;
+
   // image path getter
   get imagePath() {
     return "assets/users/" + this.user.avatar;
