@@ -257,3 +257,7 @@ Pipes are *output transformers*. They transform the output in the templates to i
 
 `:fullDate` is for the configuration purposes and you also need to import `*DatePipe*` from `'@angular/common'`.
 
+
+### 58. Getting Started with Services
+
+The idea behind services is make a class which holds the data and the opertaions to be done on that data by different components. so separating the data and the data operations from our components to make our code base leaner. 
