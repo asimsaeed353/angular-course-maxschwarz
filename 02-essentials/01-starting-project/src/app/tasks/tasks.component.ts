@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { NewTaskData } from './task/task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -15,8 +16,12 @@ export class TasksComponent {
   @Input({required: true}) name!: string;
   isAddingTask = false;
 
+  // instantiate an instance of TasksService, this instance will be used to manipulate data in the TasksService 
+  // why do we have to instantiate it like this cause if we instantiate different instances, each instance will have his own data and the modification will be made to the data of that instance and not the actual data. (same concept as copy by reference and copy by value)
+  constructor(private tasksService: TasksService){}
+
   get selectedUserTasks() {
-    return 
+    return this.tasksService.getUserTasks(this.userId);
   }
 
   // remove the task on click of complete task 

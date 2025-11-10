@@ -261,3 +261,11 @@ Pipes are *output transformers*. They transform the output in the templates to i
 ### 58. Getting Started with Services
 
 The idea behind services is make a class which holds the data and the opertaions to be done on that data by different components. so separating the data and the data operations from our components to make our code base leaner. 
+
+### 59. Getting Started with Dependency Injection
+
+The idea behind **dependency injection** is that you do not create the instance yourself. Instead, you tell Angular that you need such an instance, and Angular creates it. Angular can create this instance once, and you can use this single instance in different components, thus operating on the same data.
+
+#### Using the Constructor for Dependency Injection   
+
+How do we tell Angular that we want such an instance? We add a constructor function to the class, which is a special method executed automatically when the class is instantiated. Angular executes this constructor when it instantiates the component used in a template.
