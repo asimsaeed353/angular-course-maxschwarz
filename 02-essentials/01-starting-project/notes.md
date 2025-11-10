@@ -236,3 +236,15 @@ It gives access to the value entered by the user in the input, and also *allows 
 Do not forget to import `FormsModule` from '@angular/forms';    
 You can track each keystroke of the user when he/she is inputting any value (live).   
 Inputs in HTML always yield a **string**.
+
+### 56. Content Projection with ng-content
+
+If you have a component and you want to tell angular that i will have some content in this, you can use the placeholder as like
+
+```
+card.component.html
+<div>
+  <ng-content>
+</div>
+```  
+`<ng-content>` will act as a placeholder and it will be replaced by the markup wrapped by this component.
