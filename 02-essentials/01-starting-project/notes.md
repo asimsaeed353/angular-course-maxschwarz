@@ -223,3 +223,8 @@ Legacy:
 `else` case is a bit complex.
 
 Note: Make sure to import the NgFor and NgIf in .ts file
+
+
+### 43. More Component Communication: Deleting Tasks
+
+Flow of event, in `task.html` file, listen for the click event on the complete button, link a function `onCompleteTask()` to this click event and in this function, emit an output event. Then in the `tasks.html` file, listen for this new event and link that event to a function in `tasks.ts` file.
