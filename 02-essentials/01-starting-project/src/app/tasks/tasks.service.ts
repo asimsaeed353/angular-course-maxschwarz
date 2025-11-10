@@ -30,6 +30,16 @@ export class TasksService {
         },
     ];
 
+    // initialization - get the task from the localStorage
+    constructor() {
+      const tasks = localStorage.getItem('tasks');
+
+      // in localStorage, you can store data in the form of JSON string so we need to conver this string into array 
+      if(tasks) {
+        this.dummyTasks = JSON.parse(tasks);
+      }
+    }
+
     // get all users task
     getUserTasks(userId: string) {
         return this.dummyTasks.filter((task) => task.userId === userId);
@@ -43,11 +53,17 @@ export class TasksService {
         title: taskData.title,
         summary: taskData.summary, 
         dueDate: taskData.dueDate,
-        })
+        });
+        this.saveTask(); // update the task in the local Storage
     }
 
     //remove a task
     removeTask(id: string){
         this.dummyTasks = this.dummyTasks.filter((task) => task.id != id);
+        this.saveTask(); // update the task in the local Storage
+    }
+
+    private saveTask() {
+      localStorage.setItem('tasks', JSON.stringify(this.dummyTasks));
     }
 }
