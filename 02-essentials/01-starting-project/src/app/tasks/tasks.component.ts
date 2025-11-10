@@ -23,11 +23,7 @@ export class TasksComponent {
   get selectedUserTasks() {
     return this.tasksService.getUserTasks(this.userId);
   }
-
-  // remove the task on click of complete task 
-  onCompleteTask(id: string) {
-      
-  }
+  
   // on clicking 'Add Task', show Add Task Modal
   onStartAddTask(){
     this.isAddingTask = true;
