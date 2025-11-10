@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 // Decorators like 'Component' are used by Angular to add the metadata and configuration to the classes
 
 @Component({
-    selector: 'app-header', 
-    standalone: true,
+    selector: 'app-header',
     templateUrl: './header.component.html', 
     styleUrl: './header.component.css'
 })

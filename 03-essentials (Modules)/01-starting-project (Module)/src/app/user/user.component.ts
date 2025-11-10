@@ -3,12 +3,9 @@ import { Component, EventEmitter, Input, Output, output} from '@angular/core';
 // since the type defnintion can be long, store data model in a separate file and then import in this file.
 // indicate that this is data model file by writing 'type' before it 
 import {type User} from './user.model';
-import { CardComponent } from '../shared/card/card.component';
 
 @Component({
   selector: 'app-user',
-  standalone: true,
-  imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
