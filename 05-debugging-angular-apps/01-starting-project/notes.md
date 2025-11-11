@@ -294,4 +294,8 @@ Flow: To pass data from child to parent, use an event emitter and pass the data 
 <app-investment-results [results]="resultData" />
 ```
 
+### 94. Exploring the Angular DevTools
+
+Install the `Angular Dev Tools` extenstion from `https://angular.dev/tools/devtools` and add to the chrome, It will add another tab **Angular** to the developer tools in the chrome browser where you can debug your code and also measure the performance of your application etc. 
+
 
