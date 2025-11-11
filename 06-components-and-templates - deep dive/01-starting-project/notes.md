@@ -378,5 +378,11 @@ Disabling Style Encapsulation to Fix the Issue
 By setting encapsulation: ViewEncapsulation.None in the control component, the styles become global. This allows the styles defined in the component's CSS to affect the inputs and text areas projected into the component, fixing the styling issue.
 
 
+### 112. Making Sense of Component Host Elements
+
+Every Angular component has a host element, which is simply the element selected by the component's selector. For the `control component`, the host element is the `app-control` element. Inspecting the page and selecting the input shows that the input is inside a paragraph, which is inside the app-control element. That is the host element of the control component.   
+You can target the host element styles using `:host` selector in CSS.    
+The special `:host` selector is a *CSS feature* that should be known when working with Angular, as it **allows direct application of styles to the rendered host element**.
+
 
 
