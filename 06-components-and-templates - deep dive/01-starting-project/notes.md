@@ -364,6 +364,19 @@ For example, the built-in `<video>` element hides a more complex DOM tree that's
 For CSS styling, the Shadow DOM can be used to scope CSS styles to that hidden tree - instead of applying styles globally to the entire page.  
 **Angular** can *emulate* this Shadow DOM browser feature for its own components. 
 
+#### Understanding Angular's Style Scoping
+By default, Angular scopes component styles to the component they belong to. This means styles cannot affect elements outside the component or projected content. To have styles affect projected inputs and text areas elsewhere in the application, we need to adjust the style encapsulation settings.
+
+#### Configuring View Encapsulation
+To fix the styling issue, we add the encapsulation setting to the control component's decorator. This setting takes a value from the ViewEncapsulation enum, which is a TypeScript feature representing a collection of possible values. We import ViewEncapsulation from @angular/core and set the encapsulation property accordingly.
+
+#### ViewEncapsulation Options
+##### Emulated (default): Angular emulates the browser's Shadow DOM behavior, scoping styles to the component.
+##### ShadowDom: Uses the real browser Shadow DOM feature, which is not supported by all browsers.
+##### None: Disables style encapsulation, making styles global and able to affect projected content.
+Disabling Style Encapsulation to Fix the Issue
+By setting encapsulation: ViewEncapsulation.None in the control component, the styles become global. This allows the styles defined in the component's CSS to affect the inputs and text areas projected into the component, fixing the styling issue.
+
 
 
 
