@@ -357,6 +357,13 @@ Similarly, in order to target all the `<button>` which has `button` class, the s
     selector: 'button.button',
 
 
+### 111. Understanding & Configuring View Encapsulation
+
+**Shadow DOM** : A browser feature that allows you to attach hidden DOM structures to the DOM elements.   
+For example, the built-in `<video>` element hides a more complex DOM tree that's used internally  
+For CSS styling, the Shadow DOM can be used to scope CSS styles to that hidden tree - instead of applying styles globally to the entire page.  
+**Angular** can *emulate* this Shadow DOM browser feature for its own components. 
+
 
 
 
