@@ -282,3 +282,16 @@ constructor(private tasksService: TasksService){}
 ```
 private tasksService = inject(TasksService);
 ```
+
+
+### 83. Passing Data from Parent to Child with Inputs
+
+Flow: To pass data from child to parent, use an event emitter and pass the data from child to parent component. parent component then does something with that data and using a custom property, made the data available by the child components in the parent component file. 
+
+```
+<app-header />
+<app-user-input (calculate)="onCalculateInvestmentResults($event)" />
+<app-investment-results [results]="resultData" />
+```
+
+
