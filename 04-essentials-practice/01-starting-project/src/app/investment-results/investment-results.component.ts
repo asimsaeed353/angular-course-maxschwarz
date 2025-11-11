@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 
 import { InvestmentService } from '../investment.service';
@@ -16,7 +16,10 @@ export class InvestmentResultsComponent {
   // get the instance of the service class
   private investmentService = inject(InvestmentService);
 
-  get results() {
-    return this.investmentService.resultData;
-  }
+  results = computed(() => this.investmentService.resultData());
+  // -------- alternatively ----------
+  // results = this.investmentService.resultData().asReadonly();
+
+  // the above code will return a 'read-only' signal which make sure that the data(result) is not accidentally changed form outside of the service which might happen if you directly interact with the 'resultData()'
+
 }
