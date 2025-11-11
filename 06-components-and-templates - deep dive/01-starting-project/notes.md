@@ -385,4 +385,21 @@ You can target the host element styles using `:host` selector in CSS.
 The special `:host` selector is a *CSS feature* that should be known when working with Angular, as it **allows direct application of styles to the rendered host element**.
 
 
+### 114. Interacting With Host Elements From Inside Components
+
+How to give a `class` property to user component selector from the .ts file.     
+The following code work: 
+
+      <app-control class="control" label="Title">
+
+note the `class="control"` , but we have to give all the component tags this class. There can be a better way i.e. we can pass this property in the component's typescript file as
+
+    @Component({
+      selector: 'app-control',
+      host: {
+        class: 'control'
+      },
+    })
+
+
 
