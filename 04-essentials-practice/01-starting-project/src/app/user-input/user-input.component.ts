@@ -1,6 +1,6 @@
 import { Component, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import type { InvestmentInput } from '../investment-input.model';
+import { InvestmentService } from '../investment.service';
 
 @Component({
   selector: 'app-user-input',
@@ -10,17 +10,19 @@ import type { InvestmentInput } from '../investment-input.model';
   styleUrl: './user-input.component.css'
 })
 export class UserInputComponent {
-  
-  // we want to pass these values to the calculate function in the parent component i.e. AppComponent. For that, we are going to output an event 
-  calculate = output<InvestmentInput>();
 
   initialInvestment = signal('0');
   annualInvestment = signal('0');
   expectedReturn = signal('5');
   duration = signal('10');
 
+  // inject InvestmentService Dependency - initialize an instance of this class
+  // the following line will tell the Angular that it should inject the instance of this InvestmentService class as value for this investmentService parameter into this constructor function 
+  // and we need to store this parameter in a property of this class so we can access or manipulate it inside the class
+  constructor(private investmentService: InvestmentService) {}
+
   onFormSubmission(){
-    this.calculate.emit({
+    this.investmentService.calculateInvestmentResults({
       initialInvestment: +this.initialInvestment(),
       duration: +this.duration(),
       expectedReturn: +this.expectedReturn(),
