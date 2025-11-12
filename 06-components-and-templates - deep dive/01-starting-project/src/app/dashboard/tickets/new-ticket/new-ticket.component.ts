@@ -1,4 +1,4 @@
-import { Component, ElementRef, viewChild, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, viewChild, ViewChild, ViewChildren, Output, output } from '@angular/core';
 
 import { ControlComponent } from '../../../shared/control/control.component';
 import { ButtonComponent } from '../../../shared/button/button.component';
@@ -14,22 +14,15 @@ import { FormsModule } from '@angular/forms';
 export class NewTicketComponent {
 
   /* in the paranthesis, you need to pass the name of the template variable assigned in the template file. */
-  // @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
-
-  /* let's achieve the same as we have done above using ViewChild Signal() */
-  private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
-  /* .required assures typescript that such value will always be found. Alternatively while reading on the form(), place a '?' after the paranthesis which will imply that only read form() or executes any fucntion when form() is defined */
+  @ViewChild('form') private form?: ElementRef<HTMLFormElement>;
   
-  /* to store multiple instances of an element or a component */ 
-  // @ViewChildren(ButtonComponent) buttons:
+  /* property to output form values */
+  // @Output() add = new EventEmitter<{title: string; text: string}>();
+  add = output<{title: string; text: string}>();
 
    // capute the form input value(s) using Template Variables
   onSubmit(titleElement: string, textElement: string) {
-    console.dir('TITLE: ' + titleElement);
-    console.dir('TEXT: ' + textElement);
-
-    // form.reset(); // if you pass the form element from the event binder in the template file
-
-    this.form().nativeElement.reset();
+    this.add.emit({title: titleElement, text: textElement});
+    this.form?.nativeElement.reset();
   }
 }
