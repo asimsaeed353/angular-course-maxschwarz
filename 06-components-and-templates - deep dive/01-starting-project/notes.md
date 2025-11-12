@@ -535,39 +535,62 @@ By injecting DestroyRef and storing it in a property, you can set up a listener 
 
 
 ```typescript
-  export class ServerStatusComponent implements OnInit {
-    currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+export class ServerStatusComponent implements OnInit {
+  currentStatus: 'online' | 'offline' | 'unknown' = 'online';
 
-    // compnent cleanup using DestroyRef
-    private destroyRef = inject(DestroyRef);
-    // now we can listen to component destroy event and execute any function we want to execute when component is about to be destroyed.
+  // compnent cleanup using DestroyRef
+  private destroyRef = inject(DestroyRef);
+  // now we can listen to component destroy event and execute any function we want to execute when component is about to be destroyed.
 
-    constructor() {}
-    // keep your constructor clean and use for initializing values 
+  constructor() {}
+  // keep your constructor clean and use for initializing values 
 
-    // for complex tasks, use 
-    ngOnInit() {
-      console.log('ON INIT');
-      const interval = setInterval(() => {
-        const rnd = Math.random(); // 0 - 0.9999999
-        
-        if(rnd < 0.5){
-          this.currentStatus = 'online';
-        } else if (rnd < 0.9) {
-          this.currentStatus = 'offline';
-        } else {
-          this.currentStatus = 'unknown';
-        }
-      }, 5000);
+  // for complex tasks, use 
+  ngOnInit() {
+    console.log('ON INIT');
+    const interval = setInterval(() => {
+      const rnd = Math.random(); // 0 - 0.9999999
+      
+      if(rnd < 0.5){
+        this.currentStatus = 'online';
+      } else if (rnd < 0.9) {
+        this.currentStatus = 'offline';
+      } else {
+        this.currentStatus = 'unknown';
+      }
+    }, 5000);
 
-      // add a listner here, to execute some code when the comonent is about to be destroyed. similary we can add such listener at some other place in our class. 
-      this.destroyRef.onDestroy(() => {
-        clearInterval(interval);
-      });
-    }
-
-    ngAfterViewInit(){
-      console.log("AFTER VIEW INIT");
-    }
+    // add a listner here, to execute some code when the comonent is about to be destroyed. similary we can add such listener at some other place in our class. 
+    this.destroyRef.onDestroy(() => {
+      clearInterval(interval);
+    });
   }
+
+  ngAfterViewInit(){
+    console.log("AFTER VIEW INIT");
+  }
+}
+```
+
+
+### 127. Working with Template Variables
+
+Previously, we have seen that to get the value of the form input, we used *Two-Way Binding* using `[(ngModel)]`. We can use the **Template Variables**. Tempate variable gives us the whole DOM Element, it an be Input or TextArea. You mark an input field as **Template Variable** by assigning it a name starting with a '#' symbol.
+
+```html
+<form (ngSubmit)="onSubmit(titleInput)">
+  <app-control label="Title">
+    <input name="title" id="title" #titleInput />
+  </app-control>
+```
+
+```typescript
+export class NewTicketComponent {
+
+  // capute the form input value(s) using Template Variables
+  onSubmit(titleElement: HTMLInputElement) {
+    const titleValue = titleElement.value;
+    console.dir(titleValue);
+  }
+}
 ```
