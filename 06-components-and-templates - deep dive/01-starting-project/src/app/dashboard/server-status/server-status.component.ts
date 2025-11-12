@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-server-status',
@@ -8,13 +8,19 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
   styleUrl: './server-status.component.css'
 })
 export class ServerStatusComponent implements OnInit {
-  currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+  // currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+  /* Signal Alternate to this */
+  currentStatus = signal<'online' | 'offline' | 'unknown'>('offline');
 
   // compnent cleanup using DestroyRef
   private destroyRef = inject(DestroyRef);
   // now we can listen to component destroy event and execute any function we want to execute when component is about to be destroyed.
 
-  constructor() {}
+  constructor() {
+    effect(() => {
+        console.log(this.currentStatus());
+    });
+  }
   // keep your constructor clean and use for initializing values 
 
   // for complex tasks, use 
@@ -24,11 +30,11 @@ export class ServerStatusComponent implements OnInit {
       const rnd = Math.random(); // 0 - 0.9999999
       
       if(rnd < 0.5){
-        this.currentStatus = 'online';
+        this.currentStatus.set('online');
       } else if (rnd < 0.9) {
-        this.currentStatus = 'offline';
+        this.currentStatus.set('offline');
       } else {
-        this.currentStatus = 'unknown';
+        this.currentStatus.set('unknown');
       }
     }, 5000);
 

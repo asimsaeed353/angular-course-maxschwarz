@@ -718,3 +718,20 @@ export class ControlComponent {
   }
 }
 ```
+
+### 137. Making Sense of Signal Effects
+
+Sometimes, it is necessary to set up a subscription in TypeScript, but it does not happen automatically. Angular provides the `effect` function for this purpose. The `effect` function is imported from *Angular* core and can be executed in the constructor.
+
+```typescript
+import { Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';   
+
+export class ServerStatusComponent implements OnInit {
+currentStatus = signal<'online' | 'offline' | 'unknown'>('offline');
+
+constructor() {
+  effect(() => {
+      console.log(this.currentStatus());
+  });
+}
+```
