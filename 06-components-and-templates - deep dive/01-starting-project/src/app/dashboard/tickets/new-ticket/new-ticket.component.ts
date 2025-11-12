@@ -14,8 +14,8 @@ import { FormsModule } from '@angular/forms';
 export class NewTicketComponent {
 
    // capute the form input value(s) using Template Variables
-  onSubmit(titleElement: HTMLInputElement) {
-    const titleValue = titleElement.value;
-    console.dir(titleValue);
+  onSubmit(titleElement: string, textElement: string) {
+    console.dir('TITLE: ' + titleElement);
+    console.dir('TEXT: ' + textElement);
   }
 }

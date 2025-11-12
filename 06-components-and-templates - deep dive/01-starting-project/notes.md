@@ -573,7 +573,7 @@ export class ServerStatusComponent implements OnInit {
 ```
 
 
-### 127. Working with Template Variables
+### 128. Working with Template Variables
 
 Previously, we have seen that to get the value of the form input, we used *Two-Way Binding* using `[(ngModel)]`. We can use the **Template Variables**. Tempate variable gives us the whole DOM Element, it an be Input or TextArea. You mark an input field as **Template Variable** by assigning it a name starting with a '#' symbol.
 
