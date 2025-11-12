@@ -495,3 +495,15 @@ Another example:
 ```html
   <div [style.height]="(dataPoint.value / maxTraffic) * 100 + '%'"></div>
 ```
+
+
+### 120. Manipulating State & Using Literal Values
+
+#### Literal Types
+
+Allows you to assign only specific (string) values to a variable. The variable will not accept any value other than the specified values. 
+
+```typescript
+  currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+  // currentStatus will accept only one out of three specified values.
+```
