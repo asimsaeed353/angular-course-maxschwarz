@@ -1,4 +1,4 @@
-import { Component, input, Input, signal } from '@angular/core';
+import { Component, input, Input, signal,output } from '@angular/core';
 import { Ticket } from '../ticket.model';
 
 @Component({
@@ -18,11 +18,17 @@ export class TicketComponent {
   // enable/disable show details
   detailsVisible = signal(false);
 
+  // emit complete/close ticket output
+  closeTicket = output();
+
   onToggleDetails() {
     // this.detailsVisible.set(!this.detailsVisible);
     /* alternatively */
     this.detailsVisible.update((wasVisible) => !wasVisible);
-
     // update() is different from set() as it takes a function, takes the old value and return the new value.
+  }
+
+  onCompleteTicket() {
+    this.closeTicket.emit();
   }
 }

@@ -27,4 +27,15 @@ export class TicketsComponent {
 
     this.tickets.push(ticket);
   }
+
+  /* ----- mark a ticket as closed ------ */
+  onCloseTicket(id: string) {
+    this.tickets = this.tickets.map((ticket) => {
+      if (ticket.id === id){
+        return { ...ticket, status: 'closed' }
+      }
+      return ticket;
+    })
+  } 
+  // to trigger this method, we need to emit an event on the `ticket` component 
 }
