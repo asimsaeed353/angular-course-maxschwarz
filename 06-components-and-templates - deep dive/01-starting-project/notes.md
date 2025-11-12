@@ -497,7 +497,7 @@ Another example:
 ```
 
 
-### 120. Manipulating State & Using Literal Values
+### 121. Manipulating State & Using Literal Values
 
 #### Literal Types
 
@@ -507,3 +507,13 @@ Allows you to assign only specific (string) values to a variable. The variable w
   currentStatus: 'online' | 'offline' | 'unknown' = 'online';
   // currentStatus will accept only one out of three specified values.
 ```
+
+### 122. Introducing the Component Lifecycle: ngOnInit
+
+ngOnInit method will be executed by Angular whenever Angular has initialized this component's inputs. So whenever it essentially is done initializing this component.
+`ngOnInit`	Runs once after Angular has initialized all the component's inputs.   
+
+#### ngOnInit
+The ngOnInit method runs after Angular has initialized all the components inputs with their initial values. A component's ngOnInit runs exactly once.
+
+This step happens before the component's own template is initialized. This means that you can update the component's state based on its initial input values.
