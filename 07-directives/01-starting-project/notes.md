@@ -862,4 +862,45 @@ With `<ng-template>`, if you use any structual directive such as `ngIf`, you do 
     });
 ```
 
+### 161. Host Directives & Composition
 
+#### For Attribute Directives
+
+Suppose we have an *attribute directive* `appLog` which has class `LogDirective`. If we want to add this to any component e.g `<app-auth>`, we need to add it as
+```html
+<app-auth-user appLog />
+```
+Now if we have 100 such tags, we will have to add attribute `appLog` 100 times and that is quite some repitition.    
+**Solution**: Just import the structural directive and add the Class name inside the component configuration in the `<any>.component.ts` file as 
+```typescript
+// in the configuration file of the component 
+@Component({
+  selector: 'app-auth',
+  //,
+
+  hostDirectives: [LogDirective],
+})
+```
+The `hostDirectives` property allows directives to be composed and applied automatically to components or other directives, reducing repetitive directive usage.
+Now, you do not need to add `appLog` in the markup of this component select i.e. `<app-auth>
+
+#### For Structural Directives
+
+For *structural directives*, there is no `hostDirectives:[]` so we have to use it as it's selector name (e.g. `appAuth`) for example:
+```html
+<app-component appSomeStructDirec />
+```
+
+#### Merge Structual And Attribute Directives
+
+You can define an *Attribute Directive* and then import it in another *directive* probably in an *structural directive*. Directives can be injected into components or other directives **to add shared behavior**, such as logging clicks on host elements.
+
+```typescript 
+@Directive({
+  selector: '[appSafeLink]',
+  hostDirectives: [LogDirective]
+})
+export class SafeLinkDirective {}
+
+// LogDirective is a structural directive
+```
