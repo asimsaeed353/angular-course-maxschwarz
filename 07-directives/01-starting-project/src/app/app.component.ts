@@ -1,9 +1,9 @@
 import { Component, computed, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
 
 import { AuthComponent } from './auth/auth.component';
 import { LearningResourcesComponent } from './learning-resources/learning-resources.component';
 import { AuthService } from './auth/auth.service';
-import { NgIf } from "../../node_modules/@angular/common/index";
 
 @Component({
   selector: 'app-root',
