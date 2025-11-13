@@ -1,4 +1,4 @@
-import { Directive, input } from "@angular/core";
+import { Directive, ElementRef, inject, input } from "@angular/core";
 
 @Directive({
     selector: 'a[appSafeLink]', // target every anchor tag which has attribute 'appSafeLink
@@ -13,17 +13,16 @@ export class SafeLinkDirective {
     // queryParam = input('myapp');
     queryParam = input('myapp', {alias: 'appSafeLink'});
 
-    constructor() {
-        console.log('This is safe link directive.');
-    }
+    // inject ElementRef Dependency
+    private hostElementRef = inject<ElementRef<HTMLAnchorElement>>(ElementRef);
 
     onConfirmLeavePage(event: MouseEvent) {
         const wantsToLeave = window.confirm('Do You Want to Leave he Page?');
 
         if(wantsToLeave) {
             // add query parameter
-            const address = (event.target as HTMLAnchorElement).href;
-            (event.target as HTMLAnchorElement).href = address + '?from=' + this.queryParam();
+            const address = this.hostElementRef.nativeElement.href;
+            this.hostElementRef.nativeElement.href = address + '?from=' + this.queryParam();
             return ;
 
             //(event.target as HTMLAnchorElement) typecasting to convice typescript that this will be an HTML Anchor Element
