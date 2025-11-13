@@ -1,5 +1,4 @@
 import { Component, computed, inject } from '@angular/core';
-import { NgIf } from '@angular/common';
 
 import { AuthComponent } from './auth/auth.component';
 import { LearningResourcesComponent } from './learning-resources/learning-resources.component';
@@ -10,7 +9,7 @@ import { AuthService } from './auth/auth.service';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [AuthComponent, LearningResourcesComponent, NgIf],
+  imports: [AuthComponent, LearningResourcesComponent],
 })
 export class AppComponent {
   // inject auth service to get the value of the permission
