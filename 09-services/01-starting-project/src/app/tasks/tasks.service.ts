@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Task, TaskStatus } from './task.model';
+import { LogService } from '../log.service';
 
 @Injectable({
     providedIn: 'root', // makes it accessible from anywhere in the app
@@ -10,6 +11,8 @@ export class TasksService {
     private tasks = signal<Task[]>([]);
     allTasks = this.tasks.asReadonly(); // yield only read-only signals 
 
+    private logginService = inject(LogService);
+
     addTask(taskData: {title: string, description: string}){
         const newTask: Task = {
             ...taskData, 
@@ -18,10 +21,12 @@ export class TasksService {
         }
 
         this.tasks.update((oldTasks) => [...oldTasks, newTask]);
+        this.logginService.log("ADDED TAKS WITH TITLE " + taskData.title);
     }
 
     updateTaskStatus(taskId: string, newStatus: TaskStatus) {
         this.tasks.update((oldTasks) => oldTasks.map((task) => task.id === taskId ? {...task, status: newStatus} : task));
+        this.logginService.log("TASK WITH ID " + taskId + " HAS THIS STATUS " + newStatus);
 
         /* .map() takes a function, loops through each element of the array and returns a new array */
     }

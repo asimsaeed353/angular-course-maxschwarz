@@ -1053,3 +1053,39 @@ To avoid isolated instances, you must use this approach
 ```
 This way, there will be one instance of the service for the entire application, accessible everywhere and operating on the same instance.
 
+
+
+### 185. Injecting Services Into Services
+
+```typescript
+@Injectable({
+  providedIn: 'root'
+}) 
+
+// best approach if you want to use service in another service
+```
+If you did not provide the logging service at the root level (as above). For example, if you provided it in the main.ts file using the providers array in the bootstrapApplication function, it would work correctly.
+
+```typescript
+import { LogService } from './app/log.service';
+bootstrapApplication(AppComponent, {
+    providers: [LogService]
+}).catch((err) => console.error(err));
+
+// second best approach if you want to use service in another service
+```
+
+But if you tried to provide the logging service in the component's providers array, such as in the app component, you would get a null injector error.
+```typescript
+@Component({
+  ...,
+  providers: [LogService],
+})
+
+// won't work if you want to use service in another service
+```
+
+This is because *components* and *directives* reach out to the `ElementInjector`, which is the **injector used when registering services in the component's providers array**. However, `services` themselves do not reach out to the ElementInjector because *they are not elements and are not part of the DOM*.
+
+**Services** only have access to the *EnvironmentInjector* or the *ModuleInjector*. Therefore, providing a service in a component's providers array will not work for injecting that service into other services.
+
