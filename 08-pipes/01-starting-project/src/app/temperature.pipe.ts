@@ -49,6 +49,8 @@ export class TemperaturePipe implements PipeTransform {
             symbol = outputType === 'cel' ? 'C' : 'F';
         }
 
-        return `${outputTemp} °${symbol}`;
+        return `${outputTemp.toFixed(2)} °${symbol}`;
+
+        /* you can chain pipes in the markup but it might not give you the desired results so the beter approach is just transrom the value inside the pip class */
     }
 }
