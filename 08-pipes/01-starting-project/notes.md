@@ -904,3 +904,22 @@ export class SafeLinkDirective {}
 
 // LogDirective is a structural directive
 ```
+
+### 171. Understanding How Pipes Are Executed
+
+**Angular** caches the result of the *transform()* method of the Pipe in order to avoid running pipes with every change in the App. Pipe will only run if the input value changes.     
+
+#### What happens when you pass an array to the Pipe?
+When you passs an array to the Pipe, you actually *pass the reference of the array in the memory to the Pipe*. So, when you change any element of the array , the reference you passed does not change and Angular still uses the **cached result** returned by the Pipe. So for angular or for Pipe, the array does not change. If you want the Pipe to run *transform()* again on any change in the array, then you need to change the array in some specific way. Instead of overwriting one or two desired elements, you actually need to *overwrite()* the whole array.
+
+```typescript 
+onReset(index: number) {
+  /* overwriting a single element of the array (pipe's transform() would not be triggered again) */
+  // this.historicTemperatures[index] = 18;
+
+  /* overwrite whole array in order to execute the pipe functionality cause pipe will work only if the whole input changes */
+  const temp = [...this.historicTemperatures];
+  temp[index] = 18;
+  this.historicTemperatures = temp;
+}
+```

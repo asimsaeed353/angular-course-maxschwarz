@@ -23,6 +23,11 @@ export class AppComponent {
   ];
 
   onReset(index: number) {
-    this.historicTemperatures[index] = 18;
+    // this.historicTemperatures[index] = 18;
+
+    /* overwrite whole array in order to execute the pipe functionality cause pipe will work only if the whole input changes */
+    const temp = [...this.historicTemperatures];
+    temp[index] = 18;
+    this.historicTemperatures = temp;
   }
 }
