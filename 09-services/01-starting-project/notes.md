@@ -923,3 +923,27 @@ onReset(index: number) {
   this.historicTemperatures = temp;
 }
 ```
+
+### 177. How NOT To Provide A Service
+
+#### Dependency Injection
+
+Suppose we have a service class. Now, in one component you instantiate the object of this class using `new` as: 
+
+```typescript
+export class NewTaskComponent {
+  private tasksService: TasksService;
+
+  constructor () {
+    this.tasksService = new TasksService();
+  }
+
+  onAddTask(title: string, description: string){
+    this.tasksService.addTask({title: title, description: description});
+  }
+}
+```
+
+Each component creates its own instance, so they do not share state. Now the problem with this approach is that if you instantiate an other object of the same service class in some other component, you will be working on two different instances of the class and *will not be sharing data* i.e. killing the purpose of the Service Class. You might want to use the same instance of the Service Class (or any class) across you application. That's where **Dependency Injection** comes in the picture.   
+
+**Angular Dependency Injection (DI)** exists to give you `shared (singleton) service instance`. Angular’s Dependency Injection (DI) system ensures that services provided with `providedIn: 'root'` (or at a module level) are created once and shared across the application
