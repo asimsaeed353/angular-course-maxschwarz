@@ -946,4 +946,27 @@ export class NewTaskComponent {
 
 Each component creates its own instance, so they do not share state. Now the problem with this approach is that if you instantiate an other object of the same service class in some other component, you will be working on two different instances of the class and *will not be sharing data* i.e. killing the purpose of the Service Class. You might want to use the same instance of the Service Class (or any class) across you application. That's where **Dependency Injection** comes in the picture.   
 
-**Angular Dependency Injection (DI)** exists to give you `shared (singleton) service instance`. Angular’s Dependency Injection (DI) system ensures that services provided with `providedIn: 'root'` (or at a module level) are created once and shared across the application
+**Angular Dependency Injection (DI)** exists to give you `shared (singleton) service instance`. Angular’s Dependency Injection (DI) system ensures that services provided with `providedIn: 'root'` (or at a module level) are created once and shared across the application.
+
+
+### 178. Using Angular's Dependency Injection Mechanism
+
+`Angular Dependency Injection` means that the Components, Directives, and Services can request *values*, *dependencies* they rely on, which are then provided by Angular. The idea is that you do not have to create service instances yourself. Angular's Dependency Injection mechanism is *not limited to services*, but *services are the most common type* of value that is requested and injected.
+
+```typescript 
+private tasksService: TasksService;
+constructor () {
+  this.tasksService = new TasksService();
+}
+//instead of instantiating object of service class 
+
+// let angular inject the service instance - Dependency Injection DI
+constructor (tService: TasksService) {
+  this.tasksService = tService;
+}
+```
+
+or shorter version:
+```typescript
+constructor (private tasksService: TasksService) {}
+```
