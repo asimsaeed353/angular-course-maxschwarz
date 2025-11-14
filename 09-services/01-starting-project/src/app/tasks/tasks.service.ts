@@ -1,9 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import { Task, TaskStatus } from './task.model';
 
-// @Injectable({
-//     providedIn: 'root', // makes it accessible from anywhere in the app
-// })
+@Injectable({
+    providedIn: 'root', // makes it accessible from anywhere in the app
+})
 export class TasksService {
 
     /* mark the tasks private so it is writeable only in this service class and makes only read-only signals in the components where the service will be injected */

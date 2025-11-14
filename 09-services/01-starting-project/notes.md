@@ -1019,3 +1019,37 @@ Important takeaway with the above approach is the code belongs to `TasksService`
 ```
 
 All child components, meaning all components and elements used in the template of the `tasks` component, will also have access to that element injector. However, other components, such as the app component, will not have access to it. This effectively restricts the service to that part of your component tree.
+
+
+### 184. Understanding the Element Injector's Behavior
+
+#### Isolated Service Instances per Component
+
+It is also important to understand that with the `element injector`, every instance of the component where you provide that service will get its own service instance. For example, if you duplicate the usage of the `TasksComponent` in the `AppComponent` so that there are two instances, you will have two totally isolated and separated instances of the TasksService
+
+```typescript 
+@Component({
+  selector: 'app-tasks',
+  ....,
+  providers: [TasksService], // in this array you can set up injectable values that are tied to the element injector belonging to this component.
+})
+```
+
+The issue with this approach is that each component of this class will have totally separate instance of TasksService. For example: 
+```html
+<app-task /> 
+<app-task />
+```
+
+These two tags will have different instance of TasksService hence different data. Therefore the `ElementInjector` approach is **not quite right**.
+
+#### Switching to a Singleton Service Instance
+
+To avoid isolated instances, you must use this approach 
+```typescript
+@Injectable({
+    providedIn: 'root', // makes it accessible from anywhere in the app
+})
+```
+This way, there will be one instance of the service for the entire application, accessible everywhere and operating on the same instance.
+
