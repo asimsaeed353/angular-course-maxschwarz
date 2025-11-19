@@ -25,11 +25,11 @@ export class CounterComponent implements OnInit {
     }, 4000);
 
     // this setTimeout method does not change any value in the application so it should not be under angular's change detection radar. 
-    this.zone.runOutsideAngular(() => {
+    // this.zone.runOutsideAngular(() => {
       setTimeout(() => {
         console.log('Let\'s opt out of the zone change detection radar.')
       }, 5000);
-    });
+    // });
     
   }
 
