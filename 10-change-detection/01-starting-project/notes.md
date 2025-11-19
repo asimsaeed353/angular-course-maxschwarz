@@ -1148,6 +1148,13 @@ If you have applied *ChangeDetectionStrategy.OnPush* to a component, the change 
 OnPush does not restrict other components events. whenever there is an event inside component where you have applied *OnPush* the parent components of that component and the grandparent components of that component will be detected for change.    
 Therefore the real place to stop the evaluation of a component is the place *where the change detection should be avoided* and *not where the event is occuring.*
 
+### 202. The Problem With OnPush, Cross-Component Data & Not Using Signals
+
+- Migrating from Signal-based to non-Signal properties requires careful handling of change detection.
+- OnPush change detection strategy only triggers updates when inputs change, events occur, or Signals update.
+- Without inputs or Signals, OnPush components may not update as expected.
+- Understanding Angular's change detection triggers is essential for cross-component data synchronization.
+
 
 
 
