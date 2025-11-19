@@ -1,4 +1,4 @@
-import { Component, signal, NgZone, inject, OnInit } from '@angular/core';
+import { Component, signal, NgZone, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { InfoMessageComponent } from '../info-message/info-message.component';
 
@@ -8,6 +8,7 @@ import { InfoMessageComponent } from '../info-message/info-message.component';
   templateUrl: './counter.component.html',
   styleUrl: './counter.component.css',
   imports: [InfoMessageComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent implements OnInit {
   private zone = inject(NgZone);

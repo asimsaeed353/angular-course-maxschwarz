@@ -1133,4 +1133,22 @@ export class CounterComponent implements OnInit {
 This concept is called **Avoiding Zone Pollution**.
 
 
+### 199. Understanding the OnPush Strategy
+
+```typescript 
+@Component({
+  ...
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+```
+If you have applied *ChangeDetectionStrategy.OnPush* to a component, the change detection will run only if 
+- Anything changes where you have applied OnPush or any change/event occurs anywhere in the component or in the sub/child components 
+- any input value in that component changes   
+
+OnPush does not restrict other components events. whenever there is an event inside component where you have applied *OnPush* the parent components of that component and the grandparent components of that component will be detected for change.    
+Therefore the real place to stop the evaluation of a component is the place *where the change detection should be avoided* and *not where the event is occuring.*
+
+
+
+
 
