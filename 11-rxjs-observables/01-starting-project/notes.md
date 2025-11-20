@@ -1235,3 +1235,19 @@ ngOnInit() : void {
   });
 }
 ```
+
+
+### 211. Signals vs Observables
+
+**Observables**: 
+- are values that are emitted over time
+- it is stream of data to which you must subscribe in order to get notified about the data 
+- also it does not value unless it is there 
+- great for manage events and streamed data.
+
+**Signals** 
+- are containers that store values
+- you can look into signal anytime i.e. you can read its value anytime without setting up any subscription.
+- greate for managing application state   
+
+Obseravables unlike Signal() values, have no initial value while Signal must have some initial value even if 'undefined' or 'null' but somee value
