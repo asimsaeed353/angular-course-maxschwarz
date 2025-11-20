@@ -1251,3 +1251,30 @@ ngOnInit() : void {
 - greate for managing application state   
 
 Obseravables unlike Signal() values, have no initial value while Signal must have some initial value even if 'undefined' or 'null' but somee value
+
+
+### 220. Getting Started with Angular's Http Client
+
+First of all, register the Http Client (this will be used to send HTTP Requests) in `main.ts` where application is bootstrapped
+
+```typescript
+// main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http'
+
+import { AppComponent } from './app/app.component';
+
+
+bootstrapApplication(AppComponent, {
+    providers: [provideHttpClient()]
+}).catch((err) => console.error(err));
+```
+
+then inject the service in the component as:
+```typescript 
+// available-places.component.ts
+
+export class AvailablePlacesComponent {
+  private httpClient = inject(HttpClient);
+}
+```
