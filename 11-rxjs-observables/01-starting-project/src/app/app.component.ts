@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
 import { interval, map } from 'rxjs';
 
 @Component({
@@ -7,19 +7,33 @@ import { interval, map } from 'rxjs';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
+
+  clickCount = signal(0);
+
   private destroyRef = inject(DestroyRef);
 
-  ngOnInit() : void {
-    const subscription = interval(1000).pipe(
-      map((val) => val * 2)
-    ).subscribe({
-      next: (val) => console.log(val),
+  constructor(){
+    // effect() taks a callback which angular will re-execute whenever any Signal used inside is updated.
+    effect(() => {
+      console.log(`Clicked button ${this.clickCount()} times.`)
     });
+  }
 
-    this.destroyRef.onDestroy(() => {
-      subscription.unsubscribe();
-    });
+  ngOnInit() : void {
+  //   const subscription = interval(1000).pipe(
+  //     map((val) => val * 2)
+  //   ).subscribe({
+  //     next: (val) => console.log(val),
+  //   });
+
+  //   this.destroyRef.onDestroy(() => {
+  //     subscription.unsubscribe();
+  //   });
   }  
+
+  onClick() {
+    this.clickCount.update(prevCount => prevCount + 1);
+  }
 }
 
 /* 
