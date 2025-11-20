@@ -1,6 +1,6 @@
 import { afterNextRender, Component, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { interval, map } from 'rxjs';
+import { interval, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,23 @@ export class AppComponent implements OnInit {
   * while converting from observable to the signal() pass the 'initia value' of the signal as second paramter to 'toSignal()' function 
   * with toSignal(), you do not need to cean up the subscription as it will do automatically 
   */ 
+
+  /* Custom Observable from Scratch */
+  customInterval$ = new Observable((subscriber) => {
+    let timesExecuted = 0;
+    
+    const interval = setInterval(() => {
+      // subscriber.error(); // observable can throw an error 
+      if(timesExecuted >= 3){
+        clearInterval(interval);
+        subscriber.complete(); // clean up the subscription
+        return;
+      }
+      console.log('Emitting new values.....');
+      subscriber.next({message: 'Click Times'});
+      timesExecuted++;
+    }, 2000);
+  });
   
 
   private destroyRef = inject(DestroyRef);
@@ -42,6 +59,12 @@ export class AppComponent implements OnInit {
   //   this.destroyRef.onDestroy(() => {
   //     subscription.unsubscribe();
   //   });
+
+  this.customInterval$.subscribe({
+    next: (val) => console.log(val),
+    complete: () => console.log("COMPLETED"),  // listened to the completed event 
+    error: (err) => console.log(err), // log an error value 
+  });
 
     const subscription  = this.clickCount$.subscribe({
       next: (val) => console.log(`Clickes buton ${this.clickCount()}`),
