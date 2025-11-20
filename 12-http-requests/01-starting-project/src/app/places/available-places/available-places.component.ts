@@ -4,7 +4,7 @@ import { Place } from '../place.model';
 import { PlacesComponent } from '../places.component';
 import { PlacesContainerComponent } from '../places-container/places-container.component';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { map, single } from 'rxjs';
 
 @Component({
   selector: 'app-available-places',
@@ -16,11 +16,15 @@ import { map } from 'rxjs';
 export class AvailablePlacesComponent implements OnInit {
   places = signal<Place[] | undefined>(undefined);
 
+  /* show fallback loading text */
+  isLoading = signal(false);
+
   private httpClient = inject(HttpClient);
   private destroyRef = inject(DestroyRef);
   
 
   ngOnInit() {
+    this.isLoading.set(true);
     const subscription = this.httpClient.get<{places: Place[]}>('http://localhost:3000/places')
       .pipe(
         map((resData) => resData.places) // converts an object contains arrays into an array
@@ -28,6 +32,9 @@ export class AvailablePlacesComponent implements OnInit {
       .subscribe({
         next: (places) => {
           this.places.set(places);
+        },
+        complete: () => {
+          this.isLoading.set(false);
         }
       });
 
