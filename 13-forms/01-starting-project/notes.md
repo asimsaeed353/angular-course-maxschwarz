@@ -1432,3 +1432,11 @@ onSubmitForm(formData: NgForm){
    to just @if(email.touched && password.touched &&form.form.invalid)
 ```
 
+### 246. Adding Validation Styles
+
+When we use `ngModel` on an input element, Angular add some css classes to the element 
+- `ng-pristine` tells that the input field has not received any input from the user
+- `ng-invalid` tells that the input field invalid
+- `ng-touched` tells that the user has at least selected it
+
+Now these CSS classes can be used to apply some styling to these elements.
