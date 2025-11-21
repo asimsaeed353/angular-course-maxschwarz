@@ -1358,3 +1358,23 @@ bootstrapApplication(AppComponent, {
     )]
 }).catch((err) => console.error(err));
 ```
+
+### 238. Introducing HTTP Response Interceptors
+
+`return next(request);` in the interceptor return an obseravble, you can call `pipe()` on it but you can not call `subscribe()` on it because that will be the end of this request. 
+
+#### setup a reponse interceptor on request
+
+```typescript
+return next(request).pipe(
+    tap({
+        next: event => {
+            if(event.type === HttpEventType.Response){
+                console.log('[Incoming Response]');
+                console.log(event.status);
+                console.log(event.body);
+            }
+        }
+    })
+);
+```
