@@ -1440,3 +1440,7 @@ When we use `ngModel` on an input element, Angular add some css classes to the e
 - `ng-touched` tells that the user has at least selected it
 
 Now these CSS classes can be used to apply some styling to these elements.
+
+### 254. Creating and Using Async Validators
+
+**Async Validators** is a function that receives a control as input and return observable. This allows us to perform async operation such as sending HTTP requests to backend to check whether an email address has already been registered
