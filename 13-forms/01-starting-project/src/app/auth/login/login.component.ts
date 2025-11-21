@@ -93,6 +93,6 @@ export class LoginComponent implements OnInit {
 
     const enteredEmail = this.form.value.email;
     const enteredPassword = this.form.value.password;
-    console.log(enteredEmail, enteredPassword)
+    console.log(enteredEmail, enteredPassword);
   }
 }
