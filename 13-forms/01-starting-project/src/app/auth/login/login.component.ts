@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { of } from 'rxjs';
+import { debounceTime, of } from 'rxjs';
 
 // define a custom Validator 
 function mustContainQuestionMark(control: AbstractControl) {
@@ -23,6 +23,16 @@ function emailIsUnique(control: AbstractControl) {
   return of( { notUnique: true });
 }
 
+/* detached from the component's lifecycle, the following code will be executed when this file is executed */
+/* will work fine for only client side rendering, if you have server-side rendering, this might not be the good approach */
+let initialEmailValue = '';
+const savedForm = window.localStorage.getItem('saved-login-form');
+if(savedForm) {
+  const loadedForm = JSON.parse(savedForm);
+  initialEmailValue = loadedForm.email;
+}
+
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -30,9 +40,12 @@ function emailIsUnique(control: AbstractControl) {
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+
+  private destroyRef = inject(DestroyRef);
+
   form = new FormGroup({
-    email: new FormControl('', {
+    email: new FormControl(initialEmailValue, {
       validators: [Validators.required, Validators.email],
       asyncValidators: [emailIsUnique],
     }),
@@ -51,6 +64,28 @@ export class LoginComponent {
     return this.form.controls.password.touched &&
      this.form.controls.password.dirty &&
       this.form.controls.password.invalid ;
+  }
+
+  /* save the form data so user does not have to enter the email again */
+  ngOnInit() {
+
+    /* save form data */
+    // const savedForm = window.localStorage.getItem('saved-login-form');
+
+    // if(savedForm) {
+    //   const loadedForm = JSON.parse(savedForm);
+    //   // this.form.controls.email.setValue(loadedForm.email);
+    //   /* alternatively, with reactive forms */
+    //   this.form.patchValue({
+    //     email: loadedForm.email,
+    //   })
+    // }
+
+    const subscription = this.form.valueChanges.pipe(debounceTime(500)).subscribe({
+      next: (value) => window.localStorage.setItem('saved-login-form', JSON.stringify({email: value.email})),
+    });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
   onSubmit() {
