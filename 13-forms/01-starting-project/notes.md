@@ -1407,3 +1407,28 @@ onSubmitForm(formData: NgForm){
 }
 ```
 
+### 245. Using the Form Validation Status To Provide User Feedback
+
+#### Naive Approach 
+
+```html
+<!-- show error only if user has touched the form(typed some input) and the values are invalid -->
+@if(form.form.controls['email'].touched && form.form.controls['password'].touched &&form.form.invalid){
+  <p class="control-error">
+      Invalid input, please try agian.
+  </p>
+}
+```
+
+#### Better Approach - get hold of the input element control
+
+```html
+<input id="email" type="email" name="email" required ngModel #email="ngModel" />
+
+<!-- by #email="ngModel" same like #form="ngForm" we are telling angular that give us hold of the control object created by angular of this input (i.e. email) in our case  -->
+ <!-- benefit:
+  @if(form.form.controls['email'].touched && form.form.controls['password'].touched &&form.form.invalid)
+  this will shorten 
+   to just @if(email.touched && password.touched &&form.form.invalid)
+```
+

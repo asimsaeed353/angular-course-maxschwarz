@@ -3,15 +3,22 @@
 
   <div class="control-row">
     <div class="control no-margin">
-      <label for="email">Email</label>
-      <input id="email" type="email" name="email" required ngModel />
+      <label for="email">Email</label>  
+      <input id="email" type="email" name="email" required ngModel #email="ngModel" />
     </div>
 
     <div class="control no-margin">
       <label for="password">Password</label>
-      <input id="password" type="password" name="password" required minlength="6" ngModel />
+      <input id="password" type="password" name="password" required minlength="6" ngModel #password="ngModel" />
     </div>
 
     <button class="button">Login</button>
   </div>
+
+  <!-- show error only if user has touched the form(typed some input) and the values are invalid -->
+  @if(email.touched && password.touched &&form.form.invalid){
+    <p class="control-error">
+        Invalid input, please try agian.
+    </p>
+  }
 </form>
