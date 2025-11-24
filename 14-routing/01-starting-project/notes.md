@@ -1572,10 +1572,71 @@ passwords: new FormGroup({
 
 ## Section 14 - Routing
 
-### 265. What is Routing ?
+### 265. What is Routing?
 Angular offers `client-side` rendering and renders different component for different URL.
 #### Example
 
 /users    =>      UsersComponent   
 /shops    =>      ShopComponent    
 
+### 266. Enabling Routing & Adding a First Route
+
+#### Basic routing setup 
+```typescript
+// main.ts file (component based application)
+
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+import { TaskComponent } from './app/tasks/task/task.component';
+
+bootstrapApplication(AppComponent, {
+    providers: [provideRouter([
+        {
+            path: 'tasks', //<domain>/tasks
+            component: TaskComponent,
+        },
+    ])],
+}).catch((err) => console.error(err));
+```
+There can be tens of routes in your application so you might want to outsource the route definition to some other file.
+
+#### Outsource the routes array in some other file 
+Make a new file to hold the array of routes `src/app.routes.ts`
+```typescript
+import { Routes } from "@angular/router";
+import { TasksComponent } from "./tasks/tasks.component";
+
+export const routes: Routes = [
+  {
+      path: 'tasks', //<domain>/tasks
+      component: TasksComponent,
+  }
+]
+```
+
+And then in the `main.ts`:
+```typescript
+bootstrapApplication(AppComponent, {
+    providers: [provideRouter(routes)],
+}).catch((err) => console.error(err));
+```
+You can even place the whole configuration object in the `src/app.config.ts`
+```typescript 
+// config file to hold the configuration objects
+import { ApplicationConfig } from "@angular/core";
+import { provideRouter } from "@angular/router";
+import { routes } from "./app.routes";
+
+export const appConfig: ApplicationConfig = {
+    providers: [provideRouter(routes)],
+}
+```
+
+then in the `main.ts`:
+```typescript
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
+```
