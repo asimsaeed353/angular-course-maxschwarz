@@ -1744,4 +1744,8 @@ export class UserTasksComponent implements OnInit {
 
 With this approach and using a *console.log()* statement you can see that the whole component will not be rendered again and again but only the changes will be rendered.
 
+### 275. Nested Routes
+
+Child routes are a special Angular feature that allows us to work with nested router outlets. It will essentially allow us to load a component into another component that was loaded because of another route. 
+
 
