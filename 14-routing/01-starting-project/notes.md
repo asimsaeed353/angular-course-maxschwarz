@@ -1658,3 +1658,11 @@ Angular provides `routerLink` directive to handle navigation. It sets up the pat
 <a routerLink="/tasks">
 <!-- since it is a directive,  you need to import the directive in the component.ts file -->
 ```
+
+### 270. Styling Active Navigation Links
+
+Angular offers `routerLinkActive` directive that applies the specified CSS class to the element if is the element that led to the *currently active route*
+
+```typescript
+<a routerLink="/tasks" routerLinkActive="selected">
+```
