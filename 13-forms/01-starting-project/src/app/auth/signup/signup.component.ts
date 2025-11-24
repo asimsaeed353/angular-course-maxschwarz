@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -33,7 +33,12 @@ export class SignupComponent {
     }),
     // drop-down input type
     role: new FormControl<'student' | 'teacher' | 'founder' | 'employee' | 'other'>('other', { validators: [Validators.required] }),
-
+    source: new FormArray([
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+      // equals the number of maximum values that you expect 
+    ]),
     // checkbox input type
     agree: new FormControl(false, { validators: [Validators.required ] })
   })
@@ -44,10 +49,10 @@ export class SignupComponent {
     const enteredEmail = this.form.value.email;
     const enteredPassword = this.form.value.password;
     
-    console.log(enteredEmail);
-    console.log(enteredPassword);
+    // console.log(enteredEmail);
+    // console.log(enteredPassword);
 
-    this.onReset();
+    // this.onReset();
   }
 
   onReset() {

@@ -1514,3 +1514,24 @@ password: new FormGroup({
   </div>
 </div>
 ```
+
+### 260. Working with Form Arrays
+
+Sometimes we have more than one value coming form single form input. For example you have 4 checkboxes where user can check more than one box. In this case, you have probably one or more than one value in the input (i.e. array of values). Angular gives us `FormArray` to handle such a scenario.
+```typescript
+source: new FormArray([
+  new FormControl(false),
+  new FormControl(false),
+  new FormControl(false),
+  // equals the number of maximum values that you expect 
+]), 
+```
+In template file, you'll have to give parent element the name of the `formArray` and mark the input with array indexes 
+```html
+<fieldset formArrayName="source">
+  <input type="checkbox" id="google" name="acquisition" value="google" formControlName="0"/>
+  <input type="checkbox" id="friend" name="acquisition" value="friend" formControlName="1"/>
+  <input type="checkbox" id="other" name="acquisition" value="other" formControlName="2"/>
+</fieldset>
+```
+
