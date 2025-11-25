@@ -23,7 +23,7 @@ export const routes: Routes = [
         path: 'users/:userId', //<domain>/users/<uid>
         component: UserTasksComponent,
         children: userRoutes,
-        canMatch: [dummyCanMatch],
+        // canMatch: [dummyCanMatch],
         data: {
             message: 'Hello',
         },
