@@ -9,10 +9,19 @@ import { ActivatedRoute, RouterOutlet, RouterLink, ResolveFn, ActivatedRouteSnap
   styleUrl: './user-tasks.component.css',
   imports: [RouterOutlet, RouterLink],
 })
-export class UserTasksComponent{
+export class UserTasksComponent implements OnInit {
   userName = input.required<string>();
 
   message = input.required<string>();
+  
+  // activatedRoute = inject(ActivatedRoute);
+  // ngOnInit(): void {
+  //   this.activatedRoute.data.subscribe({
+  //     next: data => {
+  //       console.log(data);
+  //     }
+  //   })
+  // }
 }
 
 export const resolveUserName: ResolveFn<string> = (activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot) => {
