@@ -1853,3 +1853,17 @@ message = input.required<string>();
 
 console.log("Input message " + this.message());
 ```
+
+### 291. Accessing Route Data In Components
+
+`activatedRoute.data` gives us access to all (static and dynamic) data of the route. Here's how you can access the data observable to get hold of all the data of this route.
+
+```typescript
+ngOnInit(): void {
+  this.activatedUser.data.subscriber({
+    next: data => {
+      console.log(data);
+    }
+  })
+}
+```
