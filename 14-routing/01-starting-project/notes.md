@@ -1746,6 +1746,34 @@ With this approach and using a *console.log()* statement you can see that the wh
 
 ### 275. Nested Routes
 
-Child routes are a special Angular feature that allows us to work with nested router outlets. It will essentially allow us to load a component into another component that was loaded because of another route. 
+Child routes are a special Angular feature that allows us to work with nested router outlets. It will essentially allow us to load a component into another component that was loaded because of another route.
+
+### 276. Route Links & Relative Links
+
+Angular allows relative routes. If you have child routes defined than in the template file you can append to the parent route and do not have to write the whole route. You can give relative path. For example, if parent route is `/users/:userID`, then in the template you can write `href="/tasks` and it will be appended to the `/users/:userID/tasks` and same like if you write `tasks/new` then it will be appended as `/users/:userID/tasks/new`.
+
+```typescript
+// defined parents and child routes
+{
+    path: 'users/:userId', //<domain>/users/<uid>
+    component: UserTasksComponent,
+    children: [
+        {
+            path: 'tasks', //<domain>/users/<uid>/tasks
+            component: TasksComponent,
+        },
+        {
+            path: 'tasks/new', //<domain>/users/<uid>/tasks/new
+            component: NewTaskComponent,
+        },
+    ]
+},
+```
+
+```html
+<a routerLink="tasks/new">Add Task</a>
+
+<!-- it will be appended with parent route and will become <domain>/users/:uid/tasks/new -->
+```
 
 
