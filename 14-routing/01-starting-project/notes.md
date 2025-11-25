@@ -1776,4 +1776,16 @@ Angular allows relative routes. If you have child routes defined than in the tem
 <!-- it will be appended with parent route and will become <domain>/users/:uid/tasks/new -->
 ```
 
+### 277. Accessing Parent Route Data From Inside Nested Routes
 
+By default, child routes do not receive path parameters as inputs. Child components can only get the path parameters that belong directly to their route through input binding. To access path parameters of a parent route in a child route, you must explicitly inform Angular about this intention in the router configuration. Alternatively, we could use the `paramMap` and `activatedRoute` approach. *Input Binding* , by default, does not work for child routes. So by default, a component can only access the route paramteres that belong to its routes, through *Input Binding*.
+
+```typescript
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes, withComponentInputBinding(), withRouterConfig({
+      paramsInheritanceStrategy: 'always',
+  })),],
+}
+```
+
+`withRouterConfig({ paramsInheritanceStrategy: 'always', })` This setting ensure that dynamic path parameter values are injected into child routes. 
