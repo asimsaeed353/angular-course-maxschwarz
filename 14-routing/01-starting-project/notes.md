@@ -1818,3 +1818,15 @@ Angular allows you to setup a so called **catch-all route** which is defined at 
   component: NotFoundComponent,
 }
 ```
+
+### 281. Redirecting Users
+
+```typescript 
+children: [
+  {
+      path: '',
+      redirectTo: 'tasks',
+      pathMatch: 'full',
+  },
+]
+```
