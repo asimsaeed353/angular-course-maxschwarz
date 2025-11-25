@@ -1789,3 +1789,21 @@ export const appConfig: ApplicationConfig = {
 ```
 
 `withRouterConfig({ paramsInheritanceStrategy: 'always', })` This setting ensure that dynamic path parameter values are injected into child routes. Now you will have access to userId in the components that are linked to child routes. 
+
+###   
+
+```html
+<a routerLink="../">Cancel</a>
+<!-- this will go one level above in the path -->
+ <!-- from <domain>/tasks/ui/tasks/new  =>  <domain>/tasks/ui/tasks  -->
+```
+
+#### Programmatic Navigation
+
+```typescript
+this.router.navigate(['/users', this.userId(), 'tasks'], {
+  replaceUrl: true, // make sure the user can not come back to old form submission by cilcking back button in browser
+})
+
+// redirect to some other url after form subission 
+```
