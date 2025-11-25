@@ -1807,3 +1807,14 @@ this.router.navigate(['/users', this.userId(), 'tasks'], {
 
 // redirect to some other url after form subission 
 ```
+
+### 280. Adding A "Not Found" Route
+
+Angular allows you to setup a so called **catch-all route** which is defined at the end of all the routes and this route will be activated if no other routes matched with the path currently entered in the URL. It can be used to show the Not Found Page.
+
+```typescript
+{
+  path: '**',
+  component: NotFoundComponent,
+}
+```
