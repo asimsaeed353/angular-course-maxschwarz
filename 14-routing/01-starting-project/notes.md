@@ -1867,3 +1867,18 @@ ngOnInit(): void {
   })
 }
 ```
+
+### 292. Controlling Route Resolver Execution
+
+The default behavior of the Angular is that the *resolver functions* will only be executed if the route parameter changes and not if the query parameter changes. And you can overwrite that behavior by adding another property called `runGuardsAndResolvers: 'paramsOrQueryParamsChange',` in route definition 
+
+```typescript
+{
+  path: 'tasks', // <your-domain>/users/<uid>/tasks
+  component: TasksComponent,
+  runGuardsAndResolvers: 'paramsOrQueryParamsChange',
+  resolve: {
+    userTasks: resolveUserTasks,
+  },
+},
+```
