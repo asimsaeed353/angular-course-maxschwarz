@@ -1964,3 +1964,21 @@ By default, without any configuration, `@Defer` will make Angular load the compo
 
 ### 336. New Component 
 
+### 342. Fully Understanding the Component Selector
+
+```typescript 
+@Component({
+  selector: 'app-servers', // works as a tag selector 
+  // selector: '[app-server]', // attribute selector -> <di app-servers></div>
+  // selector : '.app-server', // class selector <div class="app-server"></div>
+  
+  // * selecting by id is not available in Angular
+
+  templateUrl: './servers.component.html',  
+  // template: '<app-server></app-server><app-server></app-server><app-server></app-server>',
+  // you have to have either 'templateUrl or template' property 
+
+  styleUrl: './servers.component.css',
+})
+```
+
