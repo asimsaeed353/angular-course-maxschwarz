@@ -41,10 +41,11 @@
   </p>
 </section>
 
-@defer(on viewport) {
+@defer(on interaction; prefetch on hover) {
   <app-offer-preview />
 } @placeholder {
-  <p>We might have an offer......</p>
+  <p class="fallback">Click here to see the offer......</p>
 }
 
 <!-- on viewport ensures that the component can only be loaded if it is in viewport, meaning the user can see it. -->
+ <!-- prefetch will fetch the code but won't show it until user click on the element -->

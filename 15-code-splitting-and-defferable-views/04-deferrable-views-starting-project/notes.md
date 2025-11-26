@@ -1946,3 +1946,16 @@ By default, without any configuration, `@Defer` will make Angular load the compo
 
 <!-- on viewport ensures that the component can only be loaded if it is in viewport, meaning the user can see it. -->
 ```
+
+### 309. Prefetching Lazy-loaded code
+
+```html
+@defer(on interaction; prefetch on hover) {
+  <app-offer-preview />
+} @placeholder {
+  <p class="fallback">Click here to see the offer......</p>
+}
+
+<!-- 'on interaction' the component will be shown only when the user clicks on it or on the fallback -->
+<!-- prefetch will fetch the code but won't show it until user click on the element -->
+```
